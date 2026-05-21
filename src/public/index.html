@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Copa do Mundo 2026 — Painel Oficial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════ TOP NAVBAR ═══════════════════════════════ -->
+  <nav class="topnav" id="topnav">
+    <div class="topnav__brand">
+      <span class="topnav__shield">⚽</span>
+      <span class="topnav__name">COPA <em>2026</em></span>
+    </div>
+    <div class="topnav__links">
+      <button class="topnav__btn active" id="btnInicio" onclick="showSection('inicio')">
+        <i class="fa-solid fa-house"></i> Início
+      </button>
+      <button class="topnav__btn" id="btnCadastrar" onclick="showSection('cadastrar')">
+        <i class="fa-solid fa-plus-circle"></i> Cadastrar
+      </button>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════ HEADER ═════════════════════════════════ -->
+  <header class="hero" id="hero">
+    <div class="hero__noise"></div>
+    <div class="hero__orb hero__orb--1"></div>
+    <div class="hero__orb hero__orb--2"></div>
+    <div class="hero__orb hero__orb--3"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">FIFA • UNITED 2026</p>
+      <h1 class="hero__title">
+        <span class="hero__title-line1">WORLD</span>
+        <span class="hero__title-line2">CUP</span>
+        <span class="hero__title-year">2026</span>
+      </h1>
+      <p class="hero__sub">Painel de Gerenciamento Oficial &mdash; USA · CAN · MEX</p>
+    </div>
+    <div class="hero__stats">
+      <div class="hero__stat" id="statSelecoes">
+        <span class="hero__stat-num" id="numSelecoes">—</span>
+        <span class="hero__stat-label">Seleções</span>
+      </div>
+      <div class="hero__stat" id="statGrupos">
+        <span class="hero__stat-num" id="numGrupos">—</span>
+        <span class="hero__stat-label">Grupos</span>
+      </div>
+      <div class="hero__stat" id="statJogos">
+        <span class="hero__stat-num" id="numJogos">—</span>
+        <span class="hero__stat-label">Jogos</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════ MAIN ══════════════════════════════════ -->
+  <main class="main-wrapper">
+
+    <!-- ──────────────── SEÇÃO: INÍCIO ──────────────── -->
+    <section class="section section--inicio active" id="secInicio">
+
+      <div class="section__header">
+        <h2 class="section__title"><i class="fa-solid fa-chart-simple"></i> Visão Geral</h2>
+        <button class="btn btn--ghost btn--sm" onclick="refreshAll()">
+          <i class="fa-solid fa-arrows-rotate"></i> Atualizar
+        </button>
+      </div>
+
+      <div class="overview-grid">
+
+        <!-- SELEÇÕES -->
+        <div class="overview-card" id="cardSelecoes">
+          <div class="overview-card__head">
+            <div class="overview-card__icon overview-card__icon--gold">
+              <i class="fa-solid fa-flag"></i>
+            </div>
+            <div>
+              <h3 class="overview-card__title">Seleções</h3>
+              <p class="overview-card__count" id="countSelecoes">carregando...</p>
+            </div>
+          </div>
+          <ul class="tag-list" id="lista"></ul>
+        </div>
+
+        <!-- GRUPOS -->
+        <div class="overview-card" id="cardGrupos">
+          <div class="overview-card__head">
+            <div class="overview-card__icon overview-card__icon--green">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <div>
+              <h3 class="overview-card__title">Grupos</h3>
+              <p class="overview-card__count" id="countGrupos">carregando...</p>
+            </div>
+          </div>
+          <ul class="tag-list" id="listaGrupos"></ul>
+        </div>
+
+        <!-- GRUPOS × SELEÇÕES -->
+        <div class="overview-card overview-card--wide" id="cardGrupoSelecao">
+          <div class="overview-card__head">
+            <div class="overview-card__icon overview-card__icon--blue">
+              <i class="fa-solid fa-sitemap"></i>
+            </div>
+            <div>
+              <h3 class="overview-card__title">Grupos &amp; Seleções</h3>
+              <p class="overview-card__count" id="countGrupoSelecao">carregando...</p>
+            </div>
+          </div>
+          <ul class="pair-list" id="listaGrupoSelecao"></ul>
+        </div>
+
+        <!-- JOGOS -->
+        <div class="overview-card overview-card--full" id="cardJogos">
+          <div class="overview-card__head">
+            <div class="overview-card__icon overview-card__icon--red">
+              <i class="fa-solid fa-futbol"></i>
+            </div>
+            <div>
+              <h3 class="overview-card__title">Jogos</h3>
+              <p class="overview-card__count" id="countJogos">carregando...</p>
+            </div>
+          </div>
+          <div class="match-grid" id="listaJogos"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ──────────────── SEÇÃO: CADASTRAR ──────────────── -->
+    <section class="section section--cadastrar" id="secCadastrar">
+
+      <div class="cadastrar-layout">
+
+        <!-- Sidebar lateral -->
+        <aside class="sidebar" id="sidebar">
+          <p class="sidebar__label">PAINEL</p>
+          <nav class="sidebar__nav">
+            <button class="sidebar__item active" id="sideSelecoes" onclick="showForm('formSelecoes')">
+              <i class="fa-solid fa-flag"></i>
+              <span>Seleções</span>
+            </button>
+            <button class="sidebar__item" id="sideGrupos" onclick="showForm('formGrupos')">
+              <i class="fa-solid fa-layer-group"></i>
+              <span>Grupos</span>
+            </button>
+            <button class="sidebar__item" id="sideGrupoSelecao" onclick="showForm('formGrupoSelecao')">
+              <i class="fa-solid fa-sitemap"></i>
+              <span>Grupo + Seleção</span>
+            </button>
+            <button class="sidebar__item" id="sideJogos" onclick="showForm('formJogos')">
+              <i class="fa-solid fa-futbol"></i>
+              <span>Jogos</span>
+            </button>
+          </nav>
+        </aside>
+
+        <!-- Área de conteúdo -->
+        <div class="form-area">
+
+          <!-- ── Formulário: Seleções ── -->
+          <div class="form-panel active" id="formSelecoes">
+            <div class="form-panel__header">
+              <div class="form-panel__icon"><i class="fa-solid fa-flag"></i></div>
+              <div>
+                <h2 class="form-panel__title">Cadastrar Seleção</h2>
+                <p class="form-panel__sub">Adicione uma seleção ao torneio</p>
+              </div>
+            </div>
+            <div class="form-card">
+              <div class="field">
+                <label class="field__label" for="nome">
+                  <i class="fa-solid fa-earth-americas"></i> Nome da Seleção
+                </label>
+                <input class="field__input" type="text" id="nome" placeholder="Ex: Brasil, Argentina, França..." />
+              </div>
+              <button class="btn btn--primary" onclick="cadastrar()">
+                <i class="fa-solid fa-plus"></i> Cadastrar Seleção
+              </button>
+              <div class="feedback" id="feedbackSelecao"></div>
+            </div>
+
+            <div class="form-panel__list-header">
+              <h3>Seleções Cadastradas</h3>
+            </div>
+            <ul class="form-list" id="listaFormSelecoes"></ul>
+          </div>
+
+          <!-- ── Formulário: Grupos ── -->
+          <div class="form-panel" id="formGrupos">
+            <div class="form-panel__header">
+              <div class="form-panel__icon"><i class="fa-solid fa-layer-group"></i></div>
+              <div>
+                <h2 class="form-panel__title">Cadastrar Grupo</h2>
+                <p class="form-panel__sub">Crie um grupo para a fase de grupos</p>
+              </div>
+            </div>
+            <div class="form-card">
+              <div class="field">
+                <label class="field__label" for="descricaoGrupo">
+                  <i class="fa-solid fa-tag"></i> Descrição do Grupo
+                </label>
+                <input class="field__input" type="text" id="descricaoGrupo" placeholder="Ex: Grupo A, Grupo B..." />
+              </div>
+              <button class="btn btn--primary" onclick="cadastrarGrupo()">
+                <i class="fa-solid fa-plus"></i> Cadastrar Grupo
+              </button>
+              <div class="feedback" id="feedbackGrupo"></div>
+            </div>
+
+            <div class="form-panel__list-header">
+              <h3>Grupos Cadastrados</h3>
+            </div>
+            <ul class="form-list" id="listaFormGrupos"></ul>
+          </div>
+
+          <!-- ── Formulário: Grupo + Seleção ── -->
+          <div class="form-panel" id="formGrupoSelecao">
+            <div class="form-panel__header">
+              <div class="form-panel__icon"><i class="fa-solid fa-sitemap"></i></div>
+              <div>
+                <h2 class="form-panel__title">Grupo + Seleção</h2>
+                <p class="form-panel__sub">Vincule uma seleção a um grupo</p>
+              </div>
+            </div>
+            <div class="form-card">
+              <div class="field-row">
+                <div class="field">
+                  <label class="field__label" for="idGrupo">
+                    <i class="fa-solid fa-hashtag"></i> ID do Grupo
+                  </label>
+                  <input class="field__input" type="number" id="idGrupo" placeholder="Ex: 1" />
+                </div>
+                <div class="field">
+                  <label class="field__label" for="idSelecao">
+                    <i class="fa-solid fa-hashtag"></i> ID da Seleção
+                  </label>
+                  <input class="field__input" type="number" id="idSelecao" placeholder="Ex: 3" />
+                </div>
+              </div>
+              <button class="btn btn--primary" onclick="cadastrarGrupoSelecao()">
+                <i class="fa-solid fa-link"></i> Vincular
+              </button>
+              <div class="feedback" id="feedbackGrupoSelecao"></div>
+            </div>
+
+            <div class="form-panel__list-header">
+              <h3>Vínculos Cadastrados</h3>
+            </div>
+            <ul class="form-list" id="listaFormGrupoSelecao"></ul>
+          </div>
+
+          <!-- ── Formulário: Jogos ── -->
+          <div class="form-panel" id="formJogos">
+            <div class="form-panel__header">
+              <div class="form-panel__icon"><i class="fa-solid fa-futbol"></i></div>
+              <div>
+                <h2 class="form-panel__title">Cadastrar Jogo</h2>
+                <p class="form-panel__sub">Agende uma partida entre seleções</p>
+              </div>
+            </div>
+            <div class="form-card">
+              <div class="field-row">
+                <div class="field">
+                  <label class="field__label" for="selecaoA">
+                    <i class="fa-solid fa-shield-halved"></i> ID Seleção A
+                  </label>
+                  <input class="field__input" type="number" id="selecaoA" placeholder="Ex: 1" />
+                </div>
+                <div class="field">
+                  <label class="field__label" for="selecaoB">
+                    <i class="fa-solid fa-shield-halved"></i> ID Seleção B
+                  </label>
+                  <input class="field__input" type="number" id="selecaoB" placeholder="Ex: 2" />
+                </div>
+              </div>
+              <div class="field">
+                <label class="field__label" for="dataHora">
+                  <i class="fa-solid fa-calendar-days"></i> Data e Hora
+                </label>
+                <input class="field__input" type="datetime-local" id="dataHora" />
+              </div>
+              <button class="btn btn--primary" onclick="cadastrarJogo()">
+                <i class="fa-solid fa-whistle"></i> Cadastrar Jogo
+              </button>
+              <div class="feedback" id="feedbackJogo"></div>
+            </div>
+
+            <div class="form-panel__list-header">
+              <h3>Jogos Cadastrados</h3>
+            </div>
+            <div class="match-grid match-grid--sm" id="listaFormJogos"></div>
+          </div>
+
+        </div><!-- /form-area -->
+      </div><!-- /cadastrar-layout -->
+    </section>
+
+  </main>
+
+  <!-- ════════════════════════════════ FOOTER ═════════════════════════════════ -->
+  <footer class="footer">
+    <span>⚽ FIFA World Cup 2026 &mdash; USA · CAN · MEX</span>
+    <span>Painel de Gerenciamento</span>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

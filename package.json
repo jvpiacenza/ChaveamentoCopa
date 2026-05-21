@@ -1,0 +1,30 @@
+{
+  "name": "chaveamentocopa",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/jvpiacenza/ChaveamentoCopa#readme",
+  "bugs": {
+    "url": "https://github.com/jvpiacenza/ChaveamentoCopa/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jvpiacenza/ChaveamentoCopa.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mysql2": "^3.22.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
